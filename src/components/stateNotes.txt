@@ -1,0 +1,70 @@
+ /**
+     * Note: if you ever need the old value of state
+     * to help you determine the new value of state,
+     * you should pass a callback function to your
+     * state setter function instead of using
+     * state directly. This callback function will
+     * receive the old value of state as its parameter,
+     * which you can then use to determine your new
+     * value of state.
+     */
+      const [count, setCount] = React.useState(0) 
+      
+    function add() {
+        setCount(prevCount => prevCount + 1)
+    } === correct
+
+    rather than using:
+    function add (){
+        setCount(count + 1)
+    }
+        //useState with Array Example
+        const [thingsArray, setThingsArray] = React.useState(["Thing 1", "Thing 2"])
+    
+    function addItem() {
+               setThingsArray(prevThingsArray =>{
+            return [...prevThingsArray, `Thing ${prevThingsArray.length + 1}`]
+            
+        } )
+    }
+    
+    const thingsElements = thingsArray.map(thing => <p key={thing}>{thing}</p>)
+    
+    return (
+        <div>
+            <button onClick={addItem}>Add Item</button>
+            {thingsElements}
+        </div>
+    )
+}
+
+UseEffect()
+
+It allows us to synchronize with outside systems like localStorage, API, setting up a subscription(WebSocket)
+
+It has two parameters; a compulsory function and a dependencies Array as shown below:
+UseEffect(function(){}, [])
+
+The dependencies array contains values that determines when the effect will run or how many times it should run.
+To avoid memoryLeak, we employ the concept of "UseEffect CleanUp" which is done by specifying a function as
+a return value of the original useEffect Hook as shown below:
+
+
+useEffect(()=>{
+ async function getData(){
+    const res = await fetch("https://...")
+    const data = res.json()
+    setState(data)
+ }  
+ return ()=>{
+    This is the CleanUp function
+ }
+}, [])
+
+ useEffect takes a function as its parameter. If that function
+    returns something, it needs to be a cleanup function. Otherwise,
+    it should return nothing. If we make it an async function, it
+    automatically retuns a promise instead of a function or nothing.
+    Therefore, if you want to use async operations inside of useEffect,
+    you need to define the function separately inside of the callback
+    function as shown above
